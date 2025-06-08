@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronLeft, Sparkles, CheckCircle, Loader2, AlertCircle } from 'lucide-react';
 import StepProgress from './StepProgress';
 import SkipCard from './SkipCard';
@@ -42,7 +42,11 @@ export default function SkipSelection() {
   }, []);
 
   const handleSkipSelect = (skip: SkipOption) => {
-    setSelectedSkip(skip);
+    if (selectedSkip?.id === skip.id) {
+      setSelectedSkip(null); // Unselect if already selected
+    } else {
+      setSelectedSkip(skip);
+    }
   };
 
   const handleBackToWasteType = () => {
